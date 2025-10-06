@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://b205n6veygvjk"]
+
+[ext_resource type="Texture2D" uid="uid://bqybs0wcnrn0x" path="res://assets/notas-godot-hero_sin_glow.png" id="1_o8wpl"]
+[ext_resource type="Script" uid="uid://ex5beciar86m" path="res://scripts/tail.gd" id="2_o8wpl"]
+
+[node name="Sprite2D" type="Sprite2D"]
+position = Vector2(7.62939e-06, 0)
+scale = Vector2(0.65, 0.954054)
+texture = ExtResource("1_o8wpl")
+hframes = 5
+vframes = 3
+frame = 10
+script = ExtResource("2_o8wpl")
+
+[node name="Timer" type="Timer" parent="."]
+autostart = true
+
+[connection signal="draw" from="." to="." method="_on_draw"]

@@ -1,0 +1,129 @@
+[gd_scene load_steps=14 format=3 uid="uid://3lvnueo6vmeb"]
+
+[ext_resource type="Texture2D" uid="uid://dmqckmrmvsllq" path="res://assets/notas-godot-hero.webp" id="1_okbh3"]
+[ext_resource type="Script" uid="uid://c1nmlabymytf1" path="res://scripts/key_listener.gd" id="2_aa1vv"]
+[ext_resource type="Texture2D" uid="uid://bgkccnj4pdgqi" path="res://assets/Retro Impact Effect Pack 5 A.png" id="3_aa1vv"]
+
+[sub_resource type="Animation" id="Animation_aa1vv"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("GlowOverlay:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1.3, 1.3, 1.3, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_qqb2j"]
+resource_name = "explosion"
+
+[sub_resource type="Animation" id="Animation_okbh3"]
+resource_name = "key_hit"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("GlowOverlay:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1.3, 1.3, 1.3, 1), Color(1.3, 1.3, 1.3, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_qqb2j"]
+_data = {
+&"RESET": SubResource("Animation_aa1vv"),
+&"explosion": SubResource("Animation_qqb2j"),
+&"key_hit": SubResource("Animation_okbh3")
+}
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_aa1vv"]
+atlas = ExtResource("3_aa1vv")
+region = Rect2(64, 1288, 64, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qqb2j"]
+atlas = ExtResource("3_aa1vv")
+region = Rect2(128, 1288, 64, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jnhre"]
+atlas = ExtResource("3_aa1vv")
+region = Rect2(192, 1288, 64, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fuxer"]
+atlas = ExtResource("3_aa1vv")
+region = Rect2(256, 1288, 64, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uqltk"]
+atlas = ExtResource("3_aa1vv")
+region = Rect2(320, 1288, 64, 56)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_x4oa3"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_aa1vv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qqb2j")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jnhre")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fuxer")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uqltk")
+}],
+"loop": true,
+"name": &"fire",
+"speed": 10.0
+}]
+
+[node name="KeyListener" type="Sprite2D"]
+z_index = 6
+position = Vector2(13, 5.75)
+scale = Vector2(1.01994, 1.01024)
+texture = ExtResource("1_okbh3")
+hframes = 5
+vframes = 4
+script = ExtResource("2_aa1vv")
+
+[node name="TailTimer" type="Timer" parent="."]
+one_shot = true
+autostart = true
+
+[node name="GlowOverlay" type="Sprite2D" parent="."]
+visible = false
+modulate = Color(1.3, 1.3, 1.3, 1)
+position = Vector2(1.9609, 13.1157)
+texture = ExtResource("1_okbh3")
+hframes = 5
+vframes = 3
+frame = 5
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_qqb2j")
+}
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+visible = false
+light_mask = 17
+visibility_layer = 17
+z_index = 9
+position = Vector2(3.9218, -7.67145)
+scale = Vector2(2.37322, 2.69465)
+sprite_frames = SubResource("SpriteFrames_x4oa3")
+animation = &"fire"
+frame_progress = 0.613402
+
+[connection signal="timeout" from="TailTimer" to="." method="_on_tail_timer_timeout"]

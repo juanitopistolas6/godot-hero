@@ -1,0 +1,26 @@
+[gd_scene load_steps=3 format=3 uid="uid://m7cor2mpjudt"]
+
+[ext_resource type="Texture2D" uid="uid://dmqckmrmvsllq" path="res://assets/notas-godot-hero.webp" id="1_dbpn1"]
+[ext_resource type="Script" uid="uid://ca23y6moobj02" path="res://scripts/falling_key.gd" id="2_dbpn1"]
+
+[node name="FallingKey" type="Sprite2D"]
+z_index = 1
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("1_dbpn1")
+hframes = 5
+vframes = 3
+frame = 5
+script = ExtResource("2_dbpn1")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 5.0
+one_shot = true
+autostart = true
+
+[node name="DestroyerTimer" type="Timer" parent="."]
+wait_time = 4.5
+one_shot = true
+autostart = true
+
+[connection signal="draw" from="." to="." method="_on_draw"]
+[connection signal="timeout" from="DestroyerTimer" to="." method="_on_destroyer_timer_timeout"]

@@ -1,0 +1,51 @@
+[gd_scene load_steps=5 format=3 uid="uid://boi2ivm44mhsb"]
+
+[ext_resource type="Script" uid="uid://cmogn8wuam11v" path="res://scripts/song_entry.gd" id="1_3tvoj"]
+[ext_resource type="Script" uid="uid://bpt6drdfeqrrc" path="res://button_entry.gd" id="2_85pwb"]
+[ext_resource type="FontFile" uid="uid://coicnilyo7pai" path="res://assets/BubbleBobble-MVpLp.otf" id="3_fb74i"]
+[ext_resource type="Texture2D" uid="uid://b4bl2ylvpync8" path="res://music_assets/the_weekend_album.jpeg" id="4_ctxyg"]
+
+[node name="SongEntry" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_3tvoj")
+
+[node name="Button" type="Button" parent="."]
+z_as_relative = false
+layout_mode = 0
+offset_right = 356.0
+offset_bottom = 97.0
+script = ExtResource("2_85pwb")
+
+[node name="cover" type="TextureRect" parent="Button"]
+visibility_layer = 3
+z_as_relative = false
+layout_mode = 0
+offset_left = 12.0
+offset_top = 11.0
+offset_right = 99.0
+offset_bottom = 82.0
+texture = ExtResource("4_ctxyg")
+expand_mode = 1
+
+[node name="song" type="Label" parent="."]
+layout_mode = 0
+offset_left = 113.0
+offset_top = 15.0
+offset_right = 159.0
+offset_bottom = 47.0
+theme_override_fonts/font = ExtResource("3_fb74i")
+theme_override_font_sizes/font_size = 20
+text = "Song"
+
+[node name="artist" type="Label" parent="."]
+layout_mode = 0
+offset_left = 113.0
+offset_top = 58.0
+offset_right = 172.0
+offset_bottom = 90.0
+text = "Artist"
+
+[connection signal="mouse_entered" from="Button" to="." method="_on_button_mouse_entered"]
+[connection signal="mouse_exited" from="Button" to="." method="_on_button_mouse_exited"]
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

@@ -1,0 +1,56 @@
+[gd_scene load_steps=5 format=3 uid="uid://dselv3pe0ar2t"]
+
+[ext_resource type="Script" uid="uid://bb11p62qfp33p" path="res://scenes/menu_selection.gd" id="1_6p2u6"]
+[ext_resource type="Texture2D" uid="uid://cecs2lbmdsur7" path="res://music_assets/nokia_background.jpg" id="1_g1eig"]
+[ext_resource type="Script" uid="uid://di76jf8geql5n" path="res://song_entry_detail.gd" id="2_2ohef"]
+[ext_resource type="FontFile" uid="uid://18fctpaag8yy" path="res://assets/NeonMachine-n6Bg.ttf" id="3_mvxsn"]
+
+[node name="Control" type="Panel"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_6p2u6")
+
+[node name="cover" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 587.0
+offset_top = 67.0
+offset_right = 1013.0
+offset_bottom = 308.0
+texture = ExtResource("1_g1eig")
+expand_mode = 1
+stretch_mode = 5
+script = ExtResource("2_2ohef")
+
+[node name="song" type="Label" parent="."]
+layout_mode = 0
+offset_left = 590.0
+offset_top = 325.0
+offset_right = 902.0
+offset_bottom = 369.0
+theme_override_fonts/font = ExtResource("3_mvxsn")
+theme_override_font_sizes/font_size = 40
+text = "Nokia "
+
+[node name="difficulty" type="Label" parent="."]
+layout_mode = 0
+offset_left = 596.0
+offset_top = 434.0
+offset_right = 708.0
+offset_bottom = 497.0
+theme_override_font_sizes/font_size = 45
+text = "☆☆☆"
+
+[node name="artist" type="Label" parent="."]
+layout_mode = 0
+offset_left = 594.0
+offset_top = 383.0
+offset_right = 634.0
+offset_bottom = 432.0
+theme_override_fonts/font = ExtResource("3_mvxsn")
+theme_override_font_sizes/font_size = 45
+text = "Drake"
+
+[connection signal="draw" from="cover" to="cover" method="_on_draw"]
