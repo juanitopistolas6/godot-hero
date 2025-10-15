@@ -39,6 +39,20 @@ var song_data = [
 		"res://music_assets/the_weekend_album.jpeg",
 		"★★★",
 		"THE_WEEKEND"
+	],
+	[
+		"INSTANT CRUSH",
+		"DAFT PUNK",
+		"res://music_assets/instant_crush.png",
+		"★★★",
+		"INSTANT_CRUSH"
+	],
+	[
+		"ONE MORE TIME",
+		"DAFT PUNK",
+		"res://music_assets/instant_crush.png",
+		"★★★",
+		"ONE_MORE_TIME"
 	]
 ]
 # Called when the node enters the scene tree for the first time.

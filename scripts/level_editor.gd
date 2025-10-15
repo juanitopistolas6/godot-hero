@@ -1,7 +1,7 @@
 extends Node2D
 
 const in_edit_node: bool = false
-@export var current_level_name: String = "TEST"
+@export var current_level_name: String
 
 
 var fk_fall_time: float = 1.9666
@@ -28,6 +28,14 @@ var level_info = {
 		"fk_times": TheWeekend.value,
 		"music": preload("res://music/the_weekend.wav")
 	},
+	"INSTANT_CRUSH": {
+		"fk_times": InstantCrush.value,
+		"music": preload("res://music/instant_crush.wav")
+	},
+	"ONE_MORE_TIME": {
+		"fk_times": OneMoreTime.value,
+		"music": preload("res://music/one_more_time.wav")
+	},
 	"TEST": {
 		"fk_times": "[
 			[[2.5, 5.00], [9, 3]],
@@ -43,11 +51,12 @@ var level_info = {
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	#current_level_name = Signals.level
+	current_level_name = Signals.level
 	
 	$Music.stream = level_info.get(current_level_name).get("music")
-	#$Music.play()
+	$Music.play()
 	
+	Signals.audio = $Music
 	
 	if in_edit_node:
 		Signals.KeyListenerPress.connect(KeyListenerPress)
@@ -67,11 +76,11 @@ func _ready() -> void:
 				1:
 					button_name = "S_KEY"
 				2:
-					button_name = "D_KEY"
+					button_name = "J_KEY"
 				3:
-					button_name = "F_KEY"
+					button_name = "K_KEY"
 				4:
-					button_name = "G_KEY"
+					button_name = "L_KEY"
 			for note in key:
 				spawnFallingKey(button_name, note[0], note[1])
 			

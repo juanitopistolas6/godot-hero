@@ -2,12 +2,14 @@ extends Node2D
 
 var level: String
 
+var audio: AudioStreamPlayer2D
+
 var colors = {
 	"A_KEY": "fffdcaff",
 	"S_KEY": "ffd3d3ff",
-	"D_KEY": "cfceffff",
-	"F_KEY": "ffe5ceff",
-	"G_KEY": "ceffcfff",
+	"J_KEY": "cfceffff",
+	"K_KEY": "ffe5ceff",
+	"L_KEY": "ceffcfff",
 	
 }
 

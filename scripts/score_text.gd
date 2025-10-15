@@ -13,7 +13,7 @@ func _ready() -> void:
 	
 func IncrementScore(incr: int):
 	score += incr
-	%ScoreText.text = str(score) + " pts"
+	%ScoreText.text = "[center]" + str(score) + " pts"
 
 func IncrementCombo():
 	combo_count += 1

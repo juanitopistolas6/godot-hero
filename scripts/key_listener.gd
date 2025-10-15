@@ -27,7 +27,23 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	
+	if timer_in_use:
+		if Input.is_action_pressed(key_name):
+			if !is_flame_playing:
+				$AnimatedSprite2D.frame = 0
+				$AnimatedSprite2D.visible = true
+				$AnimatedSprite2D.play("fire")
+				is_flame_playing = true
+		elif Input.is_action_just_released(key_name):
+			setFeedBackText(get_score_timing($TailTimer.wait_time, $TailTimer.time_left))
+			
+			$TailTimer.stop()
+			timer_in_use = false
+			
+			if is_flame_playing:
+				$AnimatedSprite2D.visible = false
+				$AnimatedSprite2D.stop()
+				is_flame_playing = false
 	
 	if falling_key_queue.size() > 0:
 		if falling_key_queue.front().hasPassed:
@@ -55,7 +71,6 @@ func _process(delta: float) -> void:
 			
 			$AnimationPlayer.stop()
 			$AnimationPlayer.play("key_hit")
-			$AnimatedSprite2D.play("fire")
 			var press_score_text: String = ""
 			
 			if distance_from_pass < perfect_press_threshold:
@@ -82,6 +97,7 @@ func _process(delta: float) -> void:
 			note_checked = true
 			
 			setFeedBackText(press_score_text)
+		
 
 func CreateFallingKey(button_name: String, duration: float):
 	if button_name == key_name:
@@ -98,32 +114,6 @@ func setFeedBackText(text: String):
 	get_tree().get_root().call_deferred("add_child", st_inst)
 	st_inst.setTextInfo(text)
 	st_inst.global_position = global_position
-
-func _input(event):
-	if timer_in_use:	
-		if event is InputEventKey:
-			if event.as_text() == key_name.substr(0, 1):
-				if event.pressed:
-					print(event.as_text())
-					
-					#print("timer_in_use: " + str(timer_in_use) + " de: " + str(key_name))
-					if !is_flame_playing:
-						$AnimatedSprite2D.frame = 0
-						$AnimatedSprite2D.visible = true
-						$AnimatedSprite2D.play("fire")
-						is_flame_playing = true
-				else:
-					#print("Tecla " + str(key_name.substr(0, 1)) + ": time left " + str($TailTimer.time_left) )
-					
-					setFeedBackText(get_score_timing($TailTimer.wait_time, $TailTimer.time_left))
-					
-					if is_flame_playing:
-						$AnimatedSprite2D.visible = false
-						$AnimatedSprite2D.stop()	
-						is_flame_playing = false
-					
-					$TailTimer.stop()
-					timer_in_use = false
 
 
 func _on_tail_timer_timeout() -> void:

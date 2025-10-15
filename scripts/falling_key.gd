@@ -14,7 +14,7 @@ func _init() -> void:
 	
 func _ready() -> void:
 	if duration > 0.00:
-		$DestroyerTimer.wait_time = duration + 3
+		$DestroyerTimer.wait_time = duration + 2
 		
 		$DestroyerTimer.start()
 		
@@ -54,7 +54,7 @@ func _on_destroyer_timer_timeout() -> void:
 func _on_draw() -> void:
 	if duration <= 0.0: return
 
-	var line_height = calculate_line_height(duration)  # 2 segundos
+	var line_height = calculate_line_height(duration)
 	
 	var from = to_local(global_position)     
 	from.y -= 90    
