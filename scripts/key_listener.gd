@@ -20,6 +20,15 @@ var great_press_score: float = 100
 var good_press_score: float = 50
 var ok_press_score: float = 20
 
+var sounds = [
+	load("res://assets/missed-note_1.mp3"),
+	load("res://assets/missed-note_2.mp3"),
+	load("res://assets/missed_note_3.mp3"),
+	load("res://assets/missed_note_4.mp3"),
+	load("res://assets/missed_note_5.mp3"),
+	load("res://assets/missed_note_6.mp3"),
+]
+
 func _ready() -> void:
 	$GlowOverlay.frame = frame + 5
 	$AnimationPlayer.play("key_hit")
@@ -27,6 +36,7 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
+	
 	if timer_in_use:
 		if Input.is_action_pressed(key_name):
 			if !is_flame_playing:
@@ -57,10 +67,13 @@ func _process(delta: float) -> void:
 				if !note_checked:
 					var st_inst = score_text.instantiate()
 					
+					
 					setFeedBackText("MISS")
+					#soundMissedNote()
 					
 					Signals.ResetCombo.emit()
-					
+					Signals.RegisterFail.emit()
+
 				note_checked = false
 			
 			
@@ -91,6 +104,7 @@ func _process(delta: float) -> void:
 				press_score_text = "OK"
 			else:
 				press_score_text = "MISS"
+				Signals.RegisterFail.emit()
 				Signals.ResetCombo.emit()
 			
 			#print(distance_from_pass)
@@ -115,6 +129,10 @@ func setFeedBackText(text: String):
 	st_inst.setTextInfo(text)
 	st_inst.global_position = global_position
 
+func soundMissedNote():
+	%NoteMissed.stream = sounds[randi() % sounds.size()]
+	
+	$NoteMissed.play()
 
 func _on_tail_timer_timeout() -> void:
 	setFeedBackText("TOO LATE")

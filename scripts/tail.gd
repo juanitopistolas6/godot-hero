@@ -10,7 +10,7 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	
 	if global_position.y > 300 and not hasPassed:
-		print("Tail time: ", $Timer.wait_time - $Timer.time_left)
+		#print("Tail time: ", $Timer.wait_time - $Timer.time_left)
 		$Timer.stop()
 		hasPassed = true
 		

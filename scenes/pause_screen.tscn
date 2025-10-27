@@ -1,0 +1,105 @@
+[gd_scene load_steps=7 format=3 uid="uid://3r08r7wxl5hb"]
+
+[ext_resource type="Script" uid="uid://eo0542g207l7" path="res://scripts/pause_screen.gd" id="1_duq8p"]
+[ext_resource type="Texture2D" uid="uid://c5lu2wgy5cf82" path="res://assets/cuadricula.png" id="1_qeunj"]
+[ext_resource type="FontFile" uid="uid://dhgcyck0gu16f" path="res://assets/Azonix-1VB0.otf" id="2_hr2n2"]
+[ext_resource type="Texture2D" uid="uid://ymdh67j8atdb" path="res://assets/brackets-blue.png" id="3_hr2n2"]
+[ext_resource type="Texture2D" uid="uid://o2smgftkaur0" path="res://assets/brackets-purple.png" id="4_k26m1"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_27awe"]
+content_margin_right = 20.0
+
+[node name="CanvasLayer" type="CanvasLayer"]
+script = ExtResource("1_duq8p")
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+clip_contents = true
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -338.0
+offset_top = -198.0
+offset_right = 260.0
+offset_bottom = 121.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="NinePatchRect" type="NinePatchRect" parent="PanelContainer"]
+layout_mode = 2
+texture = ExtResource("1_qeunj")
+patch_margin_left = 1
+patch_margin_top = 1
+patch_margin_right = 1
+patch_margin_bottom = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer"]
+layout_mode = 2
+theme_override_constants/separation = 111
+alignment = 1
+
+[node name="Label" type="Label" parent="PanelContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1.8, 1.8, 0.2, 1)
+theme_override_fonts/font = ExtResource("2_hr2n2")
+theme_override_font_sizes/font_size = 45
+text = "PAUSE"
+horizontal_alignment = 1
+vertical_alignment = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 33
+alignment = 1
+
+[node name="SeguirJugando" type="Button" parent="PanelContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1.7, 0.2, 1.7, 1)
+theme_override_fonts/font = ExtResource("2_hr2n2")
+theme_override_font_sizes/font_size = 25
+text = "SEGUIR JUGANDO"
+flat = true
+
+[node name="NinePatchRect" type="NinePatchRect" parent="PanelContainer/VBoxContainer/HBoxContainer/SeguirJugando"]
+layout_mode = 0
+offset_left = -6.0
+offset_top = -5.0
+offset_right = 265.0
+offset_bottom = 35.0
+texture = ExtResource("4_k26m1")
+
+[node name="VolverAlMenu" type="Button" parent="PanelContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.2, 1.7, 1.7, 1)
+theme_override_fonts/font = ExtResource("2_hr2n2")
+theme_override_font_sizes/font_size = 25
+theme_override_styles/normal = SubResource("StyleBoxEmpty_27awe")
+text = "VOLVER AL MENU"
+alignment = 2
+
+[node name="NinePatchRect" type="NinePatchRect" parent="PanelContainer/VBoxContainer/HBoxContainer/VolverAlMenu"]
+layout_mode = 0
+offset_left = -10.0
+offset_top = -5.0
+offset_right = 254.0
+offset_bottom = 35.0
+texture = ExtResource("3_hr2n2")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 4.0
+one_shot = true
+
+[node name="Label" type="Label" parent="."]
+visible = false
+offset_right = 1151.0
+offset_bottom = 647.0
+theme_override_fonts/font = ExtResource("2_hr2n2")
+theme_override_font_sizes/font_size = 200
+text = "3"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="pressed" from="PanelContainer/VBoxContainer/HBoxContainer/SeguirJugando" to="." method="_on_seguir_jugando_pressed"]
+[connection signal="pressed" from="PanelContainer/VBoxContainer/HBoxContainer/VolverAlMenu" to="." method="_on_volver_al_menu_pressed"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

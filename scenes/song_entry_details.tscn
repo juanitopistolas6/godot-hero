@@ -34,15 +34,6 @@ theme_override_fonts/font = ExtResource("3_mvxsn")
 theme_override_font_sizes/font_size = 40
 text = "Nokia "
 
-[node name="difficulty" type="Label" parent="."]
-layout_mode = 0
-offset_left = 596.0
-offset_top = 434.0
-offset_right = 708.0
-offset_bottom = 497.0
-theme_override_font_sizes/font_size = 45
-text = "☆☆☆"
-
 [node name="artist" type="Label" parent="."]
 layout_mode = 0
 offset_left = 594.0
@@ -52,5 +43,25 @@ offset_bottom = 432.0
 theme_override_fonts/font = ExtResource("3_mvxsn")
 theme_override_font_sizes/font_size = 45
 text = "Drake"
+
+[node name="difficulty" type="Label" parent="."]
+layout_mode = 0
+offset_left = 596.0
+offset_top = 434.0
+offset_right = 708.0
+offset_bottom = 497.0
+theme_override_font_sizes/font_size = 45
+text = "☆☆☆"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 590.0
+offset_top = 506.0
+offset_right = -14.0
+offset_bottom = -58.0
+theme_override_constants/separation = 20
 
 [connection signal="draw" from="cover" to="cover" method="_on_draw"]

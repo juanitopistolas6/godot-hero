@@ -125,4 +125,7 @@ sprite_frames = SubResource("SpriteFrames_x4oa3")
 animation = &"fire"
 frame_progress = 0.613402
 
+[node name="NoteMissed" type="AudioStreamPlayer2D" parent="."]
+unique_name_in_owner = true
+
 [connection signal="timeout" from="TailTimer" to="." method="_on_tail_timer_timeout"]
